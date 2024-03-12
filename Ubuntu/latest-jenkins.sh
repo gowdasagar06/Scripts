@@ -19,13 +19,6 @@ echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Install Docker
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io
-
-# Add current user to docker group to run Docker commands without sudo
-sudo usermod -aG docker $USER
-
 # Install Jenkins dependencies (OpenJDK 11)
 sudo apt install -y openjdk-11-jdk
 
@@ -44,7 +37,3 @@ sudo systemctl start jenkins
 
 # Enable Jenkins service to start on boot
 sudo systemctl enable jenkins
-
-# Display initial admin password for Jenkins
-echo "Initial admin password for Jenkins:"
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
